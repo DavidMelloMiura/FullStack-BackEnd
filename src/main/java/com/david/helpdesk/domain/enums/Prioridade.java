@@ -1,10 +1,6 @@
 package com.david.helpdesk.domain.enums;
 
-
-
-
 public enum Prioridade {
-
 
     BAIXA(0, "BAIXA"), MEDIA(1, "MEDIA"), ALTA(2, "ALTA");
 

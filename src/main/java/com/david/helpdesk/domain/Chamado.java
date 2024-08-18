@@ -4,7 +4,6 @@ import com.david.helpdesk.domain.enums.Prioridade;
 import com.david.helpdesk.domain.enums.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -26,7 +25,6 @@ public class Chamado implements Serializable {
 
     private Prioridade prioridade;
     private Status status;
-
     private String titulo;
     private String observacoes;
 

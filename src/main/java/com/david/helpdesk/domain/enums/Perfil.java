@@ -1,10 +1,6 @@
 package com.david.helpdesk.domain.enums;
 
-
-
-
 public enum Perfil {
-
 
     ADMIN(0, "ROLE_ADMIN"), CLIENTE(1, "ROLE_CLIENTE"), TECNICO(2, "ROLE_TECNICO");
 
@@ -12,11 +8,13 @@ public enum Perfil {
     private Integer codigo;
     private String descricao;
 
+//    Construtores
     Perfil(Integer codigo, String descricao) {
         this.codigo = codigo;
         this.descricao = descricao;
     }
 
+//    Getters
     public Integer getCodigo() {
         return codigo;
     }

@@ -3,6 +3,8 @@ package com.david.helpdesk.domain;
 import com.david.helpdesk.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -12,6 +14,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 // Lombok - Adicionar depois
+@Getter
+@Setter
 @Entity
 public class Pessoa implements Serializable {
 

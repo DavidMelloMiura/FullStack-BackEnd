@@ -29,6 +29,8 @@ public class DBService {
         Tecnico tec1 = new Tecnico(null, "Yoshiro", "61085928004", "yoshiro@email.com", "123");
         tec1.addPerfil(Perfil.ADMIN);
 
+        Tecnico tec2 = new Tecnico(null, "Tim", "903.347.070-56", "tim@email.com", "123");
+
         Cliente cli1 = new Cliente(null, "Yusuke", "88168950046", "yusuke@email.com","123");
 
         Chamado c1 = new Chamado(null, Prioridade.MEDIA, Status.ANDAMENTO, "Chamado 1", "Primeiro Chamado", tec1, cli1);

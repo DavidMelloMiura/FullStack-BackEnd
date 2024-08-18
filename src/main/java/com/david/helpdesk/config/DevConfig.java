@@ -8,19 +8,18 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 @Configuration
-@Profile("test")
-public class TestConfig {
+@Profile("dev")
+public class DevConfig {
 
     @Autowired
     private DBService dbService;
 
-    @Value("${spring.h2.console.enable}")
+    @Value("${spring.jpa.hibernate.dll-auto}")
     private String value;
-
 
     @Bean
     public boolean instanciaDB() {
-        if (value.equals("true")) {
+        if (value.equals("create")) {
             this.dbService.instaciaDB();
         }
         return false;
