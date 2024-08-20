@@ -47,6 +47,5 @@ public class TecnicoDTO implements Serializable {
 
     public void addPerfil(Perfil perfil) {
         this.perfis.add(perfil.getCodigo());
-
     }
 }
