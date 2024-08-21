@@ -25,4 +25,5 @@ public class StandardError implements Serializable {
         this.message = message;
         this.path = path;
     }
+
 }
