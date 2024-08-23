@@ -3,7 +3,7 @@ package com.david.helpdesk.resources;
 import com.david.helpdesk.domain.Tecnico;
 import com.david.helpdesk.domain.dtos.TecnicoDTO;
 import com.david.helpdesk.services.TecnicoService;
-import jakarta.servlet.Servlet;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +40,7 @@ public class TecnicoResource {
     }
 
     @PostMapping
-    public ResponseEntity<TecnicoDTO> create(@RequestBody TecnicoDTO objTecnicoDTO) {
+    public ResponseEntity<TecnicoDTO> create(@Valid @RequestBody TecnicoDTO objTecnicoDTO) {
         Tecnico newTecnico = tecnicoService.create(objTecnicoDTO);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -48,6 +48,18 @@ public class TecnicoResource {
                 .buildAndExpand(newTecnico.getId())
                 .toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<TecnicoDTO> update(@PathVariable Integer id, @RequestBody TecnicoDTO objTecnicoDTO) {
+        Tecnico obj = tecnicoService.update(id, objTecnicoDTO);
+        return ResponseEntity.ok().body(new TecnicoDTO(obj));
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        tecnicoService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 

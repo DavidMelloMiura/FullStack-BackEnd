@@ -27,7 +27,7 @@ public class DevConfig {
     /*
     * Quando estiver no perfil de test, vai chamar metodo instanciaDb,
     *  que cria algumas instancias que vão subir no Banco de dados
-    * OBS: Para ativar os perfis vai no application properties
+    * OBS: Para ativar os perfis dev ou test vai no application properties
     * */
 
 }

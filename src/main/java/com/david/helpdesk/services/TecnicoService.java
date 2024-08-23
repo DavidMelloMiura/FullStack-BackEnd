@@ -7,11 +7,13 @@ import com.david.helpdesk.repositories.PessoaRepository;
 import com.david.helpdesk.repositories.TecnicoRepository;
 import com.david.helpdesk.services.exception.DataIntegrityViolationException;
 import com.david.helpdesk.services.exception.ObjectNotFoundException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TecnicoService {
@@ -40,9 +42,38 @@ public class TecnicoService {
         return tecnicoRepository.save(newTecnico);
     }
 
+    public Tecnico update(@Valid Integer id, TecnicoDTO objTecnicoDTO) {
+//        objTecnicoDTO.setId(null);
+//      Usando o findById do metodo buscar por id - se não achar vai lançar o erro Exception do metodo findById
+        Tecnico oldObj = findById(id);
+        validaPorCpfEEmail(objTecnicoDTO);
+//        oldObj = new Tecnico(objTecnicoDTO);
+
+        oldObj.setNome(objTecnicoDTO.getNome());
+        oldObj.setCpf(objTecnicoDTO.getCpf());
+        oldObj.setEmail(objTecnicoDTO.getEmail());
+        oldObj.setSenha(objTecnicoDTO.getSenha());
+        oldObj.setPerfis(objTecnicoDTO.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet()));
+
+        return tecnicoRepository.save(oldObj);
+    }
+
+    public void delete(@Valid Integer id) {
+        Tecnico tecnico = findById(id); //Verifica se existe esse id
+
+//        Se tecnico tiver chamado > 0
+//        Lança Exception de integridade mostrando mesnsagem que tem chamado e não pode deletar
+        if (tecnico.getChamado().size() > 0) {
+            throw new DataIntegrityViolationException("Esse tecnico possui chamado, Não pode ser deletado");
+        }
+//      Caso não tenha chamado passa pela condição e executa o deleteById
+        tecnicoRepository.delete(tecnico);
+    }
+
+
     private void validaPorCpfEEmail(TecnicoDTO objTecnicoDTO) {
         Optional<Pessoa> obj = pessoaRepository.findByCpf(objTecnicoDTO.getCpf());
-        if(obj.isPresent() && obj.get().getId() != objTecnicoDTO.getId()) {
+        if (obj.isPresent() && obj.get().getId() != objTecnicoDTO.getId()) {
             throw new DataIntegrityViolationException("CPF já cadastrado no sistema");
         }
 
@@ -50,16 +81,10 @@ public class TecnicoService {
 //        Se não entrar na condição acima (if) significa que passou
 //        Então busca por email e verifica se existe
         obj = pessoaRepository.findByEmail(objTecnicoDTO.getEmail());
-        if(obj.isPresent() && obj.get().getId() != objTecnicoDTO.getId()) {
-            throw new DataIntegrityViolationException("Email já cadastrado no sistema");
+        if (obj.isPresent() && obj.get().getId() != objTecnicoDTO.getId()) {
+            throw new DataIntegrityViolationException("CPF já cadastrado no sistema");
+        }
+
     }
-
-
-
-//    public List<Tecnico> findTecnicoById(Integer id) {
-//        return tecnicoRepository.findById(id);
-//    }
-
-
 
 }

@@ -3,9 +3,9 @@ package com.david.helpdesk.domain.dtos;
 import com.david.helpdesk.domain.Tecnico;
 import com.david.helpdesk.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -18,10 +18,15 @@ public class TecnicoDTO implements Serializable {
     private static final long SerialVersionUID = 1L;
 
     protected Integer id;
+    @NotEmpty(message = "O Campo NOME é requerido")
     protected String nome;
+    @NotEmpty(message = "O Campo CPF é requerido")
     protected String cpf;
+    @NotEmpty(message = "O Campo EMAIL é requerido")
     protected String email;
+    @NotEmpty(message = "O Campo SENHA é requerido")
     protected String senha;
+
     protected Set<Integer> perfis = new HashSet<>();
 
     @JsonFormat(pattern = "dd/MM/yyyy")

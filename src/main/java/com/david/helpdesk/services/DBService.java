@@ -12,7 +12,6 @@ import com.david.helpdesk.repositories.PessoaRepository;
 import com.david.helpdesk.repositories.TecnicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Arrays;
 
 @Service
