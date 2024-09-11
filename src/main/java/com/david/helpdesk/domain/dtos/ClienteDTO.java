@@ -1,11 +1,12 @@
 package com.david.helpdesk.domain.dtos;
 
-import com.david.helpdesk.domain.Tecnico;
+import com.david.helpdesk.domain.Cliente;
 import com.david.helpdesk.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -14,8 +15,9 @@ import java.util.stream.Collectors;
 
 @Getter
 @Setter
-public class TecnicoDTO implements Serializable {
-    private static final long SerialVersionUID = 1L;
+public class ClienteDTO implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     protected Integer id;
     protected String nome;
@@ -24,17 +26,17 @@ public class TecnicoDTO implements Serializable {
     protected String senha;
     protected Set<Integer> perfis = new HashSet<>();
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MMyyyy")
     protected LocalDate dataCriacao = LocalDate.now();
 
-    public TecnicoDTO() {
+    public ClienteDTO() {
         super();
         addPerfil(Perfil.CLIENTE);
     }
 
-//    TecnicoDTO(Recebe um Tecnico obj)
-//    this.id(DTO) recebe um atributo do tecnico obj.getID()
-    public TecnicoDTO(Tecnico obj) {
+//    ClienteDTO(Recebe um Cliente obj)
+//    this.id(DTO) recebe um atributo do cliente obj.getID()
+    public ClienteDTO(Cliente obj) {
         this.id = obj.getId();
         this.nome = obj.getNome();
         this.cpf = obj.getCpf();

@@ -36,6 +36,8 @@ public class Tecnico extends Pessoa {
         super(id, nome, cpf, email, senha);
     }
 
+//    Construtor Tecnico que recebe um TecnicoDTO para create
+//    Usado no Service
     public Tecnico(TecnicoDTO obj) {
         this.id = obj.getId();
         this.nome = obj.getNome();

@@ -62,6 +62,12 @@ public class TecnicoResource {
         return ResponseEntity.noContent().build();
     }
 
+    /*
+    * a linha return ResponseEntity.noContent().build();
+    * Está retornando uma resposta HTTP 204 para o cliente,
+    * indicando que a operação de exclusão foi bem-sucedida
+    *  e não há mais conteúdo para retornar.
+    * */
 
 
 

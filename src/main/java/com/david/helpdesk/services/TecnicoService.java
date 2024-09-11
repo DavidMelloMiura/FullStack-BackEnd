@@ -36,9 +36,11 @@ public class TecnicoService {
     }
 
     public Tecnico create(TecnicoDTO objTecnicoDTO) {
+//      Para assegurar que id vai ser nulo se caso for enviado na requisição
+//      Senão o banco vai entender que vai ser update se caso ja estiver o id informado
         objTecnicoDTO.setId(null);
         validaPorCpfEEmail(objTecnicoDTO);
-        Tecnico newTecnico = new Tecnico(objTecnicoDTO);
+        Tecnico newTecnico = new Tecnico(objTecnicoDTO); // Construtor na class Tecnico
         return tecnicoRepository.save(newTecnico);
     }
 
