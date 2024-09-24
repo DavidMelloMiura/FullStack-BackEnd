@@ -6,11 +6,10 @@ import com.david.helpdesk.domain.dtos.ChamadoDTO;
 import com.david.helpdesk.services.ChamadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -36,7 +35,17 @@ public class ChamadoResource {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
 
+    @PostMapping
+    public ResponseEntity<ChamadoDTO> create(@RequestBody ChamadoDTO chamadoDTO) {
+        Chamado chamado = chamadoService.create(chamadoDTO);
+        URI uri = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(chamado.getId())
+                .toUri();
+        return ResponseEntity.created(uri).build();
     }
 
 
