@@ -11,6 +11,7 @@ import com.david.helpdesk.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,6 +57,10 @@ public class ChamadoService {
             chamado.setId(obj.getId());
         }
 
+        if(obj.getStatus().equals(2)) {
+            chamado.setDataFechamento(LocalDate.now());
+        }
+
         chamado.setTecnico(tecnico);
         chamado.setCliente(cliente);
         chamado.setPrioridade(obj.getPrioridade());
@@ -64,5 +69,14 @@ public class ChamadoService {
         chamado.setObservacoes(obj.getObservacoes());
         return chamado;
 
+    }
+
+
+    public Chamado update(Integer id, ChamadoDTO chamadoDTO) {
+        chamadoDTO.setId(id);
+        Chamado oldChamado = findById(id);
+        oldChamado = newChamado(chamadoDTO);
+//        oldChamado.setPrioridade(chamadoDTO.getPrioridade());
+        return chamadoRepository.save(oldChamado);
     }
 }
